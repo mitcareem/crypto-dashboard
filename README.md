@@ -38,3 +38,17 @@ Crypto Dashboard is a dynamic and responsive dashboard built with React, Vite, T
 1. **Creating `.env` file**: This step ensures sensitive information like API keys are not hardcoded in your codebase.
 2. **Setting environment variables**: The line `VITE_API_KEY=your_api_key_here` should be added to the `.env` file.
 3. **Using `.env` in the code**: You can access this API key in your React code like so: `process.env.VITE_API_KEY`.
+
+
+
+### Key Points:
+- The **License** section at the end of the README file tells others that this project is licensed under the **MIT License**.
+- Make sure to add a `LICENSE` file to your repository containing the full text of the MIT License (or whichever license you choose).
+
+### Example of MIT License (`LICENSE` file):
+
+```text
+MIT License
+
+Copyright (c) [2024] [Mohammad Naeem]
+

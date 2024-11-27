@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ... */
+
+@layer base {
+  :root {
+    --background: #ffffff;
+
+    --foreground: #0f172a;
+
+    --primary: #fcd535;
+
+    --primary-foreground: #202630;
+
+    --warning: #ff3a33;
+
+    --success: #0ecb81;
+
+    --font-color: #64748b;
+
+    --border: #e5e7eb;
+
+    --hover: #fafafa;
+
+    font-size: 10px;
+  }
+  .dark {
+    --background: #181a20;
+
+    --foreground: #ffffff;
+
+    --primary: #fcd535;
+
+    --primary-foreground: #202630;
+
+    --warning: #ff3a33;
+
+    --success: #0ecb81;
+
+    --font-color: #9eb0c7;
+
+    --border: #212d3b;
+
+    --hover: #1e2026;
+
+    font-size: 10px;
+  }
+}
+
+@layer utilities {
+  .font-size-small {
+    font-size: 1.2rem;
+  }
+
+  .font-size-regular {
+    font-size: 1.3rem;
+  }
+
+  .font-size-medium {
+    font-size: 1.4rem;
+  }
+
+  .font-size-large {
+    font-size: 1.5rem;
+  }
+
+  /* Tablet and up */
+  @media (min-width: 640px) {
+    .font-size-small {
+      font-size: 1.2rem;
+    }
+
+    .font-size-regular {
+      font-size: 1.3rem;
+    }
+
+    .font-size-medium {
+      font-size: 1.4rem;
+    }
+
+    .font-size-large {
+      font-size: 1.8rem;
+    }
+  }
+
+  /* Laptop and up */
+  @media (min-width: 1024px) {
+    .font-size-small {
+      font-size: 1.2rem;
+    }
+
+    .font-size-regular {
+      font-size: 1.3rem;
+    }
+
+    .font-size-medium {
+      font-size: 1.4rem;
+    }
+
+    .font-size-large {
+      font-size: 2rem;
+    }
+  }
+
+  /* Desktop and up */
+  @media (min-width: 1280px) {
+    .font-size-small {
+      font-size: 1.2rem;
+    }
+
+    .font-size-regular {
+      font-size: 1.3rem;
+    }
+
+    .font-size-medium {
+      font-size: 1.4rem;
+    }
+
+    .font-size-large {
+      font-size: 2rem;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

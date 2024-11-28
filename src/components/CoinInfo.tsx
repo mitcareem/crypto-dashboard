@@ -46,7 +46,7 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
           <img
             src={image}
             alt="logo"
-            className="h-[2rem] w-[2rem] tablet:h-[3rem] tablet:w-[3rem]"
+            className="h-[2rem] w-[2rem] tablet:h-[3rem] tablet:w-[3rem] rounded-full"
           />
           <div className="hidden laptop:block">{name}</div>
           <div className="uppercase text-font-color">{symbol}</div>

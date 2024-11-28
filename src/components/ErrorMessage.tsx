@@ -8,7 +8,7 @@ const ErrorMessage: React.FC = () => {
   return (
     <div className="flex gap-[1rem] items-center justify-center h-screen bg-background">
       <p className="font-size-large font-semibold text-warning animate-pulse">
-        {"Some error occurred :)"}
+        {"Server Error :)"}
       </p>
       <Button
         onClick={() => navigate("/")}

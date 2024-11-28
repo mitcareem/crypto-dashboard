@@ -19,12 +19,14 @@ import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 import ErrorMessage from "@/components/ErrorMessage";
 import BrandLogo from "@/components/BrandLogo";
+import SearchResults from "@/components/SearchResults";
 
 // icons
 import { Search, X, CircleArrowUp } from "lucide-react";
 
 // swr
 import useSWR, { Fetcher } from "swr";
+import { Button } from "@/components/ui/button";
 
 interface CoinData {
   id: string;
@@ -36,6 +38,18 @@ interface CoinData {
   high_24h: number;
   low_24h: number;
   price_change_percentage_24h: number;
+}
+
+interface CoinSearchData {
+  id: string;
+  symbol: string;
+  name: string;
+  large: string;
+  market_cap_rank: number;
+}
+
+interface SearchResults {
+  coins: CoinSearchData[];
 }
 
 interface GlobalData {
@@ -78,8 +92,39 @@ const fetchGlobalData: Fetcher<GlobalData, string> = async (url: string) => {
   return res.json();
 };
 
+const fetchSearchData: Fetcher<SearchResults, string> = async (url: string) => {
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "x-cg-demo-api-key": import.meta.env.VITE_API_KEY,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Error fetching data");
+  }
+
+  const data = await res.json();
+  return data;
+};
+
 const Home: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchUrl = `https://api.coingecko.com/api/v3/search?query=${searchQuery}`;
+
+  // Use SWR to fetch data from the search endpoint
+  const { data: searchResults } = useSWR(
+    searchQuery ? searchUrl : null,
+    fetchSearchData,
+    {
+      revalidateOnFocus: false,
+    }
+  );
+  // console.log("searchResults: ", searchResults);
+
   const perPage = 100;
   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${perPage}&page=${currentPage}`;
 
@@ -107,6 +152,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   const handleCoinClick = (id: string) => {
+    // console.log("clicked: ", id);
     navigate(`/coins/${id}`);
   };
 
@@ -130,21 +176,61 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div className="hidden tablet:flex flex-row gap-[1rem] items-center">
+        <div className="relative hidden tablet:flex flex-row gap-[1rem] items-center">
           <Searchbar>
             <Search className="text-font-color font-size-small h-[2rem] w-[2rem]" />
-            <Input />
-            <X className="text-font-color cursor-pointer h-[1.6rem] w-[1.6rem]" />
+            <Input
+              value={searchQuery}
+              placeholder="Search"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <>
+                <Button
+                  className="flex gap-[1rem] font-size-small"
+                  onClick={() => setSearchQuery("")}
+                >
+                  clear
+                  <X className="text-primary-foreground cursor-pointer h-[1.6rem] w-[1.6rem]" />
+                </Button>
+              </>
+            )}
           </Searchbar>
           <ModeToggle />
+          {searchQuery && (
+            <SearchResults
+              searchResults={searchResults}
+              handleCoinClick={handleCoinClick}
+            />
+          )}
         </div>
 
-        <div className="w-full tablet:hidden">
+        <div className="relative w-full tablet:hidden">
           <Searchbar>
             <Search className=" h-[1.6rem] w-[1.6rem]" />
-            <Input />
-            <X className="cursor-pointer h-[1.6rem] w-[1.6rem]" />
+            <Input
+              value={searchQuery}
+              placeholder="Search"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <>
+                <Button
+                  className="flex gap-[1rem] font-size-small"
+                  onClick={() => setSearchQuery("")}
+                >
+                  clear
+                  <X className="text-primary-foreground cursor-pointer h-[1.6rem] w-[1.6rem]" />
+                </Button>
+              </>
+            )}
           </Searchbar>
+          {searchQuery && (
+            <SearchResults
+              searchResults={searchResults}
+              handleCoinClick={handleCoinClick}
+            />
+          )}
         </div>
       </Header>
 

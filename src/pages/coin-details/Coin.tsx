@@ -8,6 +8,7 @@ import CoinDetails from "@/components/CoinDetails";
 import { Button } from "@/components/ui/button";
 import TimeframeSelect from "@/components/TimeframeSelect";
 import Footer from "@/components/Footer";
+import SkeletonCard from "@/components/SkeletonCard";
 // icons
 import { MoveLeft, RefreshCw } from "lucide-react";
 
@@ -110,10 +111,6 @@ const Coin: React.FC = () => {
     revalidateOnFocus: false,
   });
 
-  if (detailsLoading || chartLoading) {
-    return <Loader />;
-  }
-
   if (detailsError || chartError) {
     return <ErrorMessage />;
   }
@@ -142,6 +139,7 @@ const Coin: React.FC = () => {
 
       <div className="flex border-t border-primary flex-col pt-[1rem] laptop:grid laptop:grid-cols-12">
         {/* coin details */}
+        {detailsLoading && <SkeletonCard />}
         {coinDetails && <CoinDetails coinDetails={coinDetails} />}
         {/* chart */}
         <div className="laptop:pl-[1rem] col-span-8 py-[2rem]">
@@ -157,6 +155,7 @@ const Coin: React.FC = () => {
               refresh <RefreshCw size={14} />
             </Button>
           </div>
+          {chartLoading && <Loader />}
           {marketChart && <LineChart data={marketChart} />}
         </div>
       </div>

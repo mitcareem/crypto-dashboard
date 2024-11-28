@@ -26,8 +26,6 @@ import { Search, X, CircleArrowUp } from "lucide-react";
 // swr
 import useSWR, { Fetcher } from "swr";
 
-
-
 interface CoinData {
   id: string;
   symbol: string;
@@ -47,7 +45,6 @@ interface GlobalData {
 }
 
 const apiKey = import.meta.env.VITE_API_KEY;
-
 
 const fetchCoinData: Fetcher<CoinData[], string> = async (url: string) => {
   const res = await fetch(url, {
@@ -86,12 +83,16 @@ const Home: React.FC = () => {
   const perPage = 100;
   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${perPage}&page=${currentPage}`;
 
-  const { data, error } = useSWR<CoinData[]>(url, fetchCoinData, { revalidateOnFocus: false });
+  const { data, error } = useSWR<CoinData[]>(url, fetchCoinData, {
+    revalidateOnFocus: false,
+  });
   // console.log("data: ", data);
 
   // Fetch total number of items (to calculate max pages)
   const totalUrl = "https://api.coingecko.com/api/v3/global";
-  const { data: globalData } = useSWR<GlobalData>(totalUrl, fetchGlobalData, { revalidateOnFocus: false });
+  const { data: globalData } = useSWR<GlobalData>(totalUrl, fetchGlobalData, {
+    revalidateOnFocus: false,
+  });
 
   const totalCoins = globalData?.data?.active_cryptocurrencies || 0;
   const maxPages = Math.ceil(totalCoins / perPage);
@@ -118,7 +119,6 @@ const Home: React.FC = () => {
   };
 
   if (error) return <ErrorMessage />;
-  if (!data) return <Loader />;
 
   return (
     <div className="flex flex-col gap-[2rem]">
@@ -149,11 +149,12 @@ const Home: React.FC = () => {
       </Header>
 
       <div className="flex flex-col gap-[2rem] px-[1rem]">
-        <span className="flex flex-row justify-center tablet:block font-size-large font-bold">
+        <span className="flex flex-row justify-center tablet:px-[1rem] tablet:block font-size-large font-bold">
           Cryptocurrency Prices by Market Cap
         </span>
         <main>
           <CoinHeader />
+          {!data && !error && <Loader />}
           {data?.map((coin, index) => {
             const serialNumber = (currentPage - 1) * perPage + index + 1;
             return (

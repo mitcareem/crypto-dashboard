@@ -28,7 +28,10 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
   const isPositive: boolean = price24hChangePercent >= 0;
 
   return (
-    <div className="grid grid-cols-12 items-center capitalize font-size-regular border-b hover:bg-hover border-border px-[0.5rem] tablet:px-[1rem] py-[2rem] z-40">
+    <div
+      onClick={() => handleCoinClick(id)}
+      className="grid grid-cols-12 items-center capitalize font-size-regular border-b hover:bg-hover border-border px-[0.5rem] tablet:px-[2rem] py-[2rem] z-40"
+    >
       {/* S. No, */}
       <div className="hidden tablet:flex relative col-span-1 justify-center items-center gap-[1rem]">
         <Star
@@ -39,10 +42,7 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
       </div>
       {/* Name, Image, Symbol */}
       <div className="col-span-3 w-full flex flex-row items-center justify-between group-[1rem]:">
-        <div
-          onClick={() => handleCoinClick(id)}
-          className="cursor-pointer flex flex-row items-center pr-[1rem] gap-[1rem]"
-        >
+        <div className="cursor-pointer flex flex-row items-center pr-[1rem] gap-[1rem]">
           <img
             src={image}
             alt="logo"
@@ -52,7 +52,6 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
           <div className="uppercase text-font-color">{symbol}</div>
         </div>
         <Button
-          onClick={() => handleCoinClick(id)}
           variant={"primary"}
           className="cursor-pointer hidden tablet:flex"
         >

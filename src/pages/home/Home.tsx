@@ -148,11 +148,11 @@ const Home: React.FC = () => {
         </div>
       </Header>
 
-      <div className="flex flex-col gap-[2rem] px-[2rem]">
+      <div className="flex flex-col gap-[2rem] px-[1rem]">
         <span className="flex flex-row justify-center tablet:block font-size-large font-bold">
           Cryptocurrency Prices by Market Cap
         </span>
-        <div>
+        <main>
           <CoinHeader />
           {data?.map((coin, index) => {
             const serialNumber = (currentPage - 1) * perPage + index + 1;
@@ -171,7 +171,7 @@ const Home: React.FC = () => {
               />
             );
           })}
-        </div>
+        </main>
       </div>
       <Pagination>
         <PaginationContent className="font-size-small">

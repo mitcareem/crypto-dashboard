@@ -131,7 +131,7 @@ const Coin: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-[2rem] bg-background text-foreground px-[3rem] py-[3rem]">
+    <div className="flex flex-col gap-[2rem] bg-background text-foreground px-[1.5rem] tablet:px-[3rem] py-[3rem]">
       <Button
         className="w-[max-content] flex items-center gap-x-2 font-size-regular"
         onClick={() => navigate("/")}

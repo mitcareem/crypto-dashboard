@@ -2,7 +2,7 @@ import React from "react";
 
 const CoinHeader: React.FC = () => {
   return (
-    <div className="sticky top-0 z-50 bg-background">
+    <section className="sticky top-0 z-50 bg-background">
       <div className="grid grid-cols-12 capitalize font-size-small font-bold border-t border-b border-border px-[1rem] py-[2rem]">
         <div className="hidden tablet:flex col-span-1 justify-center item">
           #
@@ -18,7 +18,7 @@ const CoinHeader: React.FC = () => {
           market cap
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

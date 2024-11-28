@@ -18,11 +18,11 @@ const TimeframeSelect: React.FC<TimeframeSelectProps> = ({
 }) => {
   return (
     <div className="flex flex-row gap-[1rem] items-center">
-      <Label htmlFor="timeframe" className="font-size-regular">
+      <Label htmlFor="timeframe" className="font-size-regular whitespace-nowrap">
         Price History:
       </Label>
       <Select value={timeframe.toString()} onValueChange={onTimeframeChange}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-[10rem]">
           <SelectValue placeholder="Select Timeframe" />
         </SelectTrigger>
         <SelectContent>

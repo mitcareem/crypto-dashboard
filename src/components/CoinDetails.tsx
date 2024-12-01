@@ -37,7 +37,7 @@ const CoinDetails: React.FC<CoinDetailsProps> = ({ coinDetails }) => {
         <img
           src={coinDetails?.image.large}
           alt={coinDetails?.name}
-          className="h-[3rem] w-[3rem]"
+          className="h-[3rem] w-[3rem] rounded-full"
         />
         <div className="font-size-large font-bold">{coinDetails?.name}</div>
         <div className="font-size-regular uppercase text-font-color">

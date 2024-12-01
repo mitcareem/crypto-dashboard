@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useSWR, { Fetcher, mutate } from "swr";
 import Loader from "@/components/Loader";
@@ -91,6 +91,12 @@ const Coin: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [timeframe, setTimeframe] = useState<number>(1); // Default timeframe: 1 day
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   const detailsUrl = `https://api.coingecko.com/api/v3/coins/${id}`;
   const marketChartUrl = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${timeframe}`;

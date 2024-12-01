@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Searchbar from "@/components/Searchbar";
@@ -141,6 +141,12 @@ const Home: React.FC = () => {
 
   const totalCoins = globalData?.data?.active_cryptocurrencies || 0;
   const maxPages = Math.ceil(totalCoins / perPage);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, [currentPage]);
 
   const handleScrollToTop = () => {
     window.scrollTo({
